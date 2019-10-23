@@ -9,6 +9,7 @@
         size="large"
       />
     </div>
+
     <!-- 地区卡片列表 -->
     <div class="region-cards">
       <div class="region-card">
@@ -162,9 +163,9 @@ export default {
 
 .region-cards {
   max-width: 1340px;
-  height: 1160px;
   margin: 40px auto;
   padding: auto;
+  overflow: auto;
 }
 
 .region-card {
