@@ -12,117 +12,14 @@
 
     <!-- 地区卡片列表 -->
     <div class="region-cards">
-      <div class="region-card">
+      <div v-for="item in regionList" :key="item.id" class="region-card">
+        <!-- <img v-bind:src="item.first_picture" alt=""> -->
         <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
+        <div class="region-name">{{ item.name }}</div>
         <div class="region-desc">
           <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
-        </div>
-      </div>
-      <div class="region-card">
-        <img src="../assets/test.jpg" alt="">
-        <div class="region-name">名称</div>
-        <div class="region-desc">
-          <h1>简介</h1>
-          <p>
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-          </p>
-          <a-button type="danger">查看更多</a-button>
+          <p>{{ item.introduction }}</p>
+          <a-button type="danger" @click="checkDetail">查看更多</a-button>
         </div>
       </div>
     </div>
@@ -139,11 +36,66 @@ export default {
     return {
       search_keyword: '',
       current: 2,
+      regionList: [
+        {
+          id: 1,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 2,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 3,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 4,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 5,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 6,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: ''
+        },
+      ],
     }
   },
   methods: {
     onSearch(value) {
       this.search_keyword = value
+    },
+
+    checkDetail() {
+      this.$router.push({
+        path: '/detail'
+      })
     }
   },
 }
