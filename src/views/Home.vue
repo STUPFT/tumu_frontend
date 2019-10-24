@@ -9,6 +9,7 @@
         size="large"
       />
     </div>
+    
     <!-- 单选按钮 -->
     <div>
       <a-radio-group @change="onChange" v-model="value">
@@ -49,8 +50,22 @@
         </a-collapse-panel>
       </a-collapse>
     </div>
-    <!-- 测试回到顶部按钮用 -->
-    <div style="height:5000px;"></div>
+
+    <!-- 地区卡片列表 -->
+    <div class="region-cards">
+      <div v-for="item in regionList" :key="item.id" class="region-card">
+        <!-- <img v-bind:src="item.first_picture" alt=""> -->
+        <img src="../assets/test.jpg" alt="">
+        <div class="region-name">{{ item.name }}</div>
+        <div class="region-desc">
+          <h1>简介</h1>
+          <p>{{ item.introduction }}</p>
+          <a-button type="danger" @click="checkDetail">查看更多</a-button>
+        </div>
+      </div>
+    </div>
+    <a-pagination style="margin-bottom: 200px;" v-model="current" :total="50" />
+
     <!-- 回到顶部 -->
     <a-back-top />
   </div>
@@ -64,6 +79,56 @@ export default {
     return {
       search_keyword: '',
       value: 1,
+      current: 2,
+      regionList: [
+        {
+          id: 1,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 2,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 3,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 4,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 5,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
+            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
+        },
+        {
+          id: 6,
+          name: '名称',
+          first_picture: '../assets/test.jpg',
+          introduction: ''
+        },
+      ],
     }
   },
   methods: {
@@ -127,6 +192,13 @@ export default {
           ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
         }
       }
+      this.search_keyword = value
+    },
+
+    checkDetail() {
+      this.$router.push({
+        path: '/detail'
+      })
     }
   },
 }
@@ -143,6 +215,7 @@ export default {
   width: 50%;
   margin: 0 auto;
 }
+
 #collapse-filter{
   text-align: left;
 }
@@ -156,4 +229,92 @@ button.ant-btn{
   color:rgb(64, 169, 255);
   border-color: rgb(64, 169, 255);
 }
+
+.region-cards {
+  max-width: 1340px;
+  margin: 40px auto;
+  padding: auto;
+  overflow: auto;
+}
+
+.region-card {
+  width: 380px;
+  height: 300px;
+  float: left;
+  margin: 32px;
+  cursor: pointer;
+  border: 3px solid rgb(236, 240, 241);
+  border-radius: 8px;
+  box-shadow: 1px 2px 1px #888888;
+  transition: all .5s cubic-bezier(.8, .5, .2, 1.4);
+}
+
+.region-card img {
+  width: 100%;
+  height: 260px;
+  border-radius: 6px;
+  transition: all .5s cubic-bezier(.8, .5, .2, 1.4);
+}
+
+.region-card .region-name {
+  width: 100%;
+  height: 40px;
+  transition: all .5s cubic-bezier(.8, .5, .2, 1.4);
+  font-size: 18px;
+  line-height: 36px;
+  bottom: 0;
+  text-align: center;
+  background-color: rgb(236, 240, 241);
+  color: #000;
+  opacity: 0.3;
+}
+
+.region-desc {
+  position: absolute;
+  top:0px;
+  left:0px;
+  background-color: rgba(255,255,255,.7);
+  width:100%;
+  height:100%;
+  transition: all .7s ease-in-out;
+  padding: 20px;
+  box-sizing: border-box;
+  clip-path: circle(0% at 100% 100%);
+}
+
+.region-card:hover .region-desc {
+  left:0px;
+  transition: all .7s ease-in-out;
+  clip-path: circle(75%);
+}
+
+.region-card:hover {
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  box-shadow: 0px 2px 3px rgba(0,0,0,.3);
+  transform: scale(.97);
+}
+
+.region-card:hover img, .card:hover .region-name {
+  transition: all .5s cubic-bezier(.8,.5,.2,1.4);
+  filter: blur(3px);
+}
+
+.region-card h1 {
+  color: #ff3838;
+  letter-spacing: 1px;
+  margin: 0px;
+}
+
+.region-card p {
+  line-height: 24px;
+  height: 70%;
+  opacity: 0.8;
+  padding: 8px 0 0 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
+
