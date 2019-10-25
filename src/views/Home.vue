@@ -132,8 +132,8 @@ export default {
     }
   },
   methods: {
-    onSearch(value) {
-      this.search_keyword = value;
+    onSearch(keyword) {
+      this.search_keyword = keyword;
     },
     onChange(e) {
       this.value = e.target.value;
@@ -192,7 +192,6 @@ export default {
           ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
         }
       }
-      this.search_keyword = value
     },
 
     checkDetail() {

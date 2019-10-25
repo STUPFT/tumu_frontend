@@ -1,12 +1,16 @@
 <template>
   <div>
-    Rank
+    <Pictures/>
   </div>
 </template>
 
 <script>
+import Pictures from '../components/Pictures'
 export default {
-  name: 'Rank'
+  name: 'Rank',
+  components: {
+    Pictures
+  }
 }
 </script>
 
