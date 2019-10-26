@@ -9,16 +9,17 @@
         size="large"
       />
     </div>
-    
     <!-- 单选按钮 -->
-    <div>
+    <div style="margin-top: 10px;">
       <a-radio-group @change="onChange" v-model="value">
         <a-radio :value="1">按破坏类型搜索</a-radio>
         <a-radio :value="2">按地区信息搜索</a-radio>
       </a-radio-group>
     </div>
     <!--分割线-->
-    <a-divider id="divider"/>
+    <a-divider orientation="left" style="margin-bottom: 0;padding: 0 50px;">
+      <span style="font-weight: 600;">分类</span>
+    </a-divider>
     <!--折叠面板-用于过滤选择破坏类型-->
     <div id="collapse-filter">
       <a-collapse defaultActiveKey="1" :bordered="false">
@@ -64,7 +65,7 @@
         </div>
       </div>
     </div>
-    <a-pagination style="margin-bottom: 200px;" v-model="current" :total="50" />
+    <a-pagination style="margin-bottom: 80px;" v-model="current" :total="50" />
 
     <!-- 回到顶部 -->
     <a-back-top />
@@ -217,12 +218,10 @@ export default {
 
 #collapse-filter{
   text-align: left;
+  margin: 0 50px;
 }
 button.ant-btn{
   margin: 5px;
-}
-#divider{
-  margin-bottom:0;
 }
 #DY0,#rating0{
   color:rgb(64, 169, 255);

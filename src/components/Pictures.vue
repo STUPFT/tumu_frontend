@@ -30,19 +30,19 @@ export default {
 
 <style>
 .pictures-bar {
-  height: 200px;
+  height: 160px;
   width: 100%;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
 }
 
-.pictures-bar::-webkit-scrollbar {
+/* .pictures-bar::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .pictures-bar img {
-  height: 200px;
+  height: 160px;
   width: auto;
   margin-right: 10px;
   cursor: pointer;

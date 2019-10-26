@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="title">
-      <span class="website-name">潮汕民居数据库</span>
-      <span class="navigate-home" @click="navigateToHome">首页</span>
+    <div class="header">
+      <span class="name">潮汕民居数据库</span>
+      <a href="/" class="home">首页</a>
     </div>
     <router-view/>
   </div>
@@ -28,27 +28,27 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin-top: 100px;
 }
-.title {
+.header {
   width: 100%;
-  height: 80px;
-  margin-bottom: 60px;
+  height: 50px;
+  line-height: 50px;
+  position: fixed;
+  top: 0;
+  z-index: 2;
   text-align: left;
-  background: #000;
-  color: #FFF;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 5px 10px 0 rgba(0, 64, 128, 0.05);
 }
-.website-name {
-  font-size: 36px;
-  line-height: 80px;
-  margin-left: 80px;
+.name {
+  font-size: 20px;
+  line-height: 50px;
+  margin-left: 50px;
 }
-.navigate-home {
-  font-size: 18px;
-  line-height: 80px;
+.home {
   margin-left: 60px;
+  color: #0c093c;
   cursor: pointer;
-}
-.navigate-home:hover {
-  background: #0ab2d2;
 }
 </style>

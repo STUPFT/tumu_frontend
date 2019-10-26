@@ -1,19 +1,36 @@
 <template>
-  <div>
-    <Pictures/>
+  <div class="rate-container">
+    <h1 class="rate-title">评级</h1>
+    <hr style="opacity: 0.3;">
+    <a-rate :defaultValue="1" disabled />
+    <span class="rate-desc">一般严重</span>
   </div>
 </template>
 
 <script>
-import Pictures from '../components/Pictures'
 export default {
   name: 'Rank',
   components: {
-    Pictures
   }
 }
 </script>
 
-<style>
+<style scoped>
+.rate-container {
+  padding: 10px 30px;
+  width: 90%;
+  height: 120px;
+  background-color: #FFF;
+  border: 1px solid rgba(255, 255, 255);
+  border-radius: 6px;
+}
 
+.rate-container:hover {
+  box-shadow: 0 8px 8px rgba(10,16,20,.24),0 0 8px rgba(10,16,20,.12);
+}
+
+.rate-desc {
+  margin-left: 16px;
+  opacity: 0.7;
+}
 </style>

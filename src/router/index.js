@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 const Home = () => import('../views/Home.vue')
 const Detail = () => import('../views/Detail.vue')
+const Search = () => import('../views/Search.vue')
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,10 @@ export default new VueRouter({
     {
       path: '/detail',
       component: Detail
+    },
+    {
+      path: '/search',
+      component: Search
     },
     {
       path: '/',
