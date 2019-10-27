@@ -2,12 +2,12 @@
   <div class="intro-container">
     <h1>简介</h1>
     <hr style="opacity: 0.3; margin-bottom: 30px">
-    <Pictures pictureId="pictures" :imgList="imgList"/>
     <div style="margin-top: 40px;">
       <span class="intro-desc">
         {{ intro }}
       </span>
     </div>
+    <Pictures pictureId="pictures" :imgList="imgList"/>
   </div>
 </template>
 
@@ -51,5 +51,8 @@ export default {
 
 .intro-desc {
   opacity: 0.7;
+}
+.pictures-bar{
+  margin-top:30px;
 }
 </style>
