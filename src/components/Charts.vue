@@ -1,12 +1,13 @@
 <template>
   <div>
-    Statistics
+    <!-- 图表 -->
+    Charts
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Statistics'
+  name: 'Charts'
 }
 </script>
 

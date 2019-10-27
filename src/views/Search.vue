@@ -2,7 +2,7 @@
   <div class="container">
     <!-- 搜索栏组件 -->
     <div>
-        <!-- 搜索栏 -->
+      <!-- 搜索栏 -->
       <div id="search-bar">
         <a-input-search
           placeholder="input search text"
@@ -38,10 +38,11 @@
                 {{ item.intro }}
               </p>
             </div>
-            <span class="cui-btn">查看更多</span>
+            <span class="cui-btn" @click="checkDetail">查看更多</span>
           </div>
         </div>
       </div>
+      <a-back-top />
     </div>
   </div>
 </template>
@@ -51,6 +52,7 @@ export default {
   name: 'Search',
   data() {
     return {
+      value: 1,
       search_keyword: '',
       result: [
         { id: 1, name: '沟南许地', first_picture: '',
@@ -70,6 +72,12 @@ export default {
     onSearch(keyword) {
       this.search_keyword = keyword;
     },
+    onChange(e) {
+      this.value = e.target.value;
+    },
+    checkDetail() {
+      this.$router.push('/detail');
+    }
   }
 }
 </script>

@@ -135,6 +135,7 @@ export default {
   methods: {
     onSearch(keyword) {
       this.search_keyword = keyword;
+      this.$router.push('/search');
     },
     onChange(e) {
       this.value = e.target.value;

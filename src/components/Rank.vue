@@ -2,7 +2,7 @@
   <div class="rate-container">
     <h1 class="rate-title">评级</h1>
     <hr style="opacity: 0.3;">
-    <a-rate :defaultValue="1" disabled />
+    <a-rate :defaultValue="rankValue" disabled />
     <span class="rate-desc">一般严重</span>
   </div>
 </template>
@@ -10,6 +10,10 @@
 <script>
 export default {
   name: 'Rank',
+  inheritAttrs: false,
+  props: {
+    rankValue: Number
+  },
   components: {
   }
 }
@@ -18,7 +22,7 @@ export default {
 <style scoped>
 .rate-container {
   padding: 10px 30px;
-  width: 90%;
+  width: 100%;
   height: 120px;
   background-color: #FFF;
   border: 1px solid rgba(255, 255, 255);

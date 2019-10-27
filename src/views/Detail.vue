@@ -15,7 +15,7 @@
             <span slot="title"><a-icon type="database" /><span>破坏类型</span></span>
             <a-menu-item :key="'d'+index" v-for="(item, index) in damage">破坏类型{{ index+1 }}</a-menu-item>
           </a-sub-menu>
-          <a-menu-item key="stat">
+          <a-menu-item key="chart">
             <a-icon type="pie-chart" />
             数据统计
           </a-menu-item>
@@ -29,11 +29,11 @@
       <div class="right">
         <Introduction v-if="menuKey==='intro'"/>
         <Damages v-if="menuKey.startsWith('d')"/>
-        <Statistics v-if="menuKey==='stat'"/>
+        <Charts v-if="menuKey==='chart'"/>
         <div v-if="menuKey==='rank'">
-          <Rank/>
+          <Rank :rankValue="rankValue"/>
           <div style="height: 26px; width: 100%;"></div>
-          <Conclusion/>
+          <Conclusion :content="conclusion"/>
         </div>
       </div>
       <a-back-top />
@@ -44,7 +44,7 @@
 <script>
 import Introduction from '../components/Introduction'
 import Damages from '../components/Damages'
-import Statistics from '../components/Statistics'
+import Charts from '../components/Charts'
 import Rank from '../components/Rank'
 import Conclusion from '../components/Conclusion'
 
@@ -53,7 +53,7 @@ export default {
   components: {
     Introduction,
     Damages,
-    Statistics,
+    Charts,
     Rank,
     Conclusion
   },
@@ -67,7 +67,14 @@ export default {
         { name: '破坏' },
         { name: '破坏' },
         { name: '破坏' }
-      ]
+      ],
+      rankValue: 1,
+      conclusion: `
+        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
+        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
+        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
+        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
+      `
     }
   },
   methods: {
