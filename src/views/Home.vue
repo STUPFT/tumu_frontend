@@ -25,21 +25,7 @@
       <a-collapse defaultActiveKey="1" :bordered="false">
         <a-collapse-panel header="破坏类型" key="1">
           <a-button  id="DY0" @click="onDamageTyleButton">全部</a-button>
-          <a-button class="damageType" id="DY1" @click="onDamageTyleButton">破坏类型一</a-button>
-          <a-button class="damageType" id="DY2" @click="onDamageTyleButton">破坏类型二</a-button>
-          <a-button class="damageType" id="DY3" @click="onDamageTyleButton">破坏类型三</a-button>
-          <a-button class="damageType" id="DY4" @click="onDamageTyleButton">破坏类型四</a-button>
-          <a-button class="damageType" id="DY5" @click="onDamageTyleButton">破坏类型五</a-button>
-          <a-button class="damageType" id="DY6" @click="onDamageTyleButton">破坏类型六</a-button>
-          <a-button class="damageType" id="DY7" @click="onDamageTyleButton">破坏类型七</a-button>
-          <a-button class="damageType" id="DY8" @click="onDamageTyleButton">破坏类型八</a-button>
-          <a-button class="damageType" id="DY9" @click="onDamageTyleButton">破坏类型九</a-button>
-          <a-button class="damageType" id="DY10" @click="onDamageTyleButton">破坏类型十</a-button>
-          <a-button class="damageType" id="DY11" @click="onDamageTyleButton">破坏类型十一</a-button>
-          <a-button class="damageType" id="DY12" @click="onDamageTyleButton">破坏类型十二</a-button>
-          <a-button class="damageType" id="DY13" @click="onDamageTyleButton">破坏类型十三</a-button>
-          <a-button class="damageType" id="DY14" @click="onDamageTyleButton">破坏类型十四</a-button>
-          <a-button class="damageType" id="DY15" @click="onDamageTyleButton">破坏类型十五</a-button>
+          <a-button class="damageType" v-for="(value,key,index) in damageType" :key="index" :id="'DY'+ value.type_id"  @click="onDamageTyleButton">{{value.type_name}}</a-button>
         </a-collapse-panel>
         <a-collapse-panel header="待修复紧迫性评级" key="2">
           <a-button id="rating0" @click="onRepairRatingButton">全部</a-button>
@@ -81,6 +67,7 @@ export default {
       search_keyword: '',
       value: 1,
       current: 2,
+      damageType:{},
       regionList: [
         {
           id: 1,
@@ -131,6 +118,10 @@ export default {
         },
       ],
     }
+  },
+  mounted(){
+    // 获取破坏类型列表。
+    this.GetDamageTypeList();
   },
   methods: {
     onSearch(keyword) {
@@ -200,6 +191,14 @@ export default {
       this.$router.push({
         path: '/detail'
       })
+    },
+    // 获取破坏类型列表
+    async GetDamageTypeList (){
+      try{
+        this.damageType = (await this.$api.home.damageType({})).damageType;
+      }catch(err){
+        console.log(err);
+      }
     }
   },
 }

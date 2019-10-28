@@ -8,7 +8,7 @@ const Search = () => import('../views/Search.vue')
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/detail',
