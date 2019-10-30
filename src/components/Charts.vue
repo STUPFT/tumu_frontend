@@ -10,6 +10,9 @@
 <script>
 export default {
   name: 'Charts',
+  props: {
+    damages: Array
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

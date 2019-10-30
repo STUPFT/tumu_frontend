@@ -3,7 +3,7 @@
     <h1 class="rate-title">评级</h1>
     <hr style="opacity: 0.3;">
     <a-rate :defaultValue="rankValue" disabled />
-    <span class="rate-desc">一般严重</span>
+    <span class="rate-desc">{{ rateDesc[rankValue-1] }}</span>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   inheritAttrs: false,
   props: {
     rankValue: Number
+  },
+  data() {
+    return {
+      rateDesc: ['一般严重', '不严重', '严重', '较严重', '非常严重']
+    }
   },
   components: {
   }

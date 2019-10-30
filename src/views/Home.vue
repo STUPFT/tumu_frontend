@@ -126,7 +126,12 @@ export default {
   methods: {
     onSearch(keyword) {
       this.search_keyword = keyword;
-      this.$router.push('/search');
+      this.$router.push({
+        path: '/search',
+        query: {
+          keyword: keyword
+        }
+      });
     },
     onChange(e) {
       this.value = e.target.value;
@@ -189,7 +194,10 @@ export default {
 
     checkDetail() {
       this.$router.push({
-        path: '/detail'
+        path: '/detail',
+        query: {
+          id: 1
+        }
       })
     },
     // 获取破坏类型列表
