@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" v-infinite-scroll="loadMore" :infinite-scroll-disabled="busy" :infinite-scroll-distance="-40" :infinite-scroll-throttle-delay="1000">
     <!-- 搜索栏 -->
     <div id="search-bar">
       <a-input-search
@@ -40,9 +40,9 @@
 
     <!-- 地区卡片列表 -->
     <div class="region-cards">
-      <div v-for="item in regionList" :key="item.region_id" class="region-card">
+      <div v-for="(item,key,index) in regionList" :key="index" class="region-card">
         <!-- <img v-bind:src="item.first_picture" alt=""> -->
-        <img src="../assets/test.jpg" alt="">
+        <img :src="item.first_picture" alt="">
         <div class="region-name">{{ item.region_name }}</div>
         <div class="region-desc">
           <h1>简介</h1>
@@ -51,8 +51,9 @@
         </div>
       </div>
     </div>
-    <a-pagination style="margin-bottom: 80px;" v-model="current" :total="50" />
-
+    <div v-if="loading && !busy" class="demo-loading-container">
+      <a-spin />
+    </div>
     <!-- 回到顶部 -->
     <a-back-top />
   </div>
@@ -60,8 +61,10 @@
 </template>
 
 <script>
+  import infiniteScroll from 'vue-infinite-scroll'
 export default {
   name: 'Home',
+  directives: {infiniteScroll},
   data() {
     return {
       search_keyword: '',
@@ -71,7 +74,11 @@ export default {
       allDamageTypeId:'',
       repair_rating:'1,2,3,4,5',
       regionListParams:{},
-      regionList:[]
+      regionList:[],
+      busy:false, //控制下拉加载的。
+      page:0, //控制第几页。
+      loading:false, // 控制加载中标签。
+      anyMoreRegion:true // 是否还有更多的地区列表
     }
   },
   async created(){
@@ -214,6 +221,12 @@ export default {
         )
           break;
       }
+      // 对滚动加载的相关参数进行初始化
+      this.page = 0;
+      this.anyMoreRegion = true;
+      this.busy = false
+      this.regionListParams.start = 0
+      // 发送请求获取数据
       this.regionList = (await this.$api.home.regionList(this.regionListParams)).region
     },
     async changeRegionListByRepairRating(repair_rating,situation){
@@ -235,7 +248,34 @@ export default {
           )
           break;
       }
+      // 对滚动加载的相关参数进行初始化。
+      this.page = 0;
+      this.anyMoreRegion = true;
+      this.busy = false
+      this.regionListParams.start = 0
+      // 发送请求获取数据
       this.regionList = (await this.$api.home.regionList(this.regionListParams)).region
+    },
+    async loadMore(){
+      // 防止regionListParams还没初始化就执行了这个函数导致报错。
+      if(this.regionListParams.start === undefined){
+        return;
+      }
+      this.loading = true;
+      if(this.anyMoreRegion){
+        this.page++;
+        this.regionListParams.start = this.page * 10;
+        let regionList = (await this.$api.home.regionList(this.regionListParams)).region
+        !(regionList.length === 0)? this.regionList = this.regionList.concat(regionList) : (()=>{
+          this.anyMoreRegion = false;
+          this.busy = false;
+          this.$message.warning('所有地区已经加载完');
+        })()
+      }
+      else{
+        this.$message.warning('所有地区已经加载完')
+      }
+      this.loading = false;
     }
   },
 }
@@ -351,6 +391,12 @@ button.ant-btn{
   -webkit-line-clamp: 7;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.demo-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
 }
 </style>
 
