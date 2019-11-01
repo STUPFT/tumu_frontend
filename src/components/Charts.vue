@@ -23,6 +23,8 @@ export default {
   },
   methods:{
     initDamageTypePie(){
+      console.log(this.damages)
+      const {data,legend} = this.formatData()
       const damageTypePie = this.$echarts.init(document.getElementById('damageTypePie'), 'light');
       const options = {
         title : {
@@ -33,10 +35,18 @@ export default {
           trigger: 'item',
           formatter: "{a} <br/>{b} :{d}%"
         },
+        toolbox: {
+          show: true,
+          feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
+          }
+        },
         legend: {
           orient: 'vertical',
           left: 'left',
-          data: ['破坏类型1','破坏类型2','破坏类型3','破坏类型4','破坏类型5','破坏类型6']
+          data: legend
         },
         series : [
           {
@@ -44,14 +54,14 @@ export default {
             type: 'pie',
             radius : '55%',
             center: ['50%', '60%'],
-            data:[
-              {value:12, name:'破坏类型1'},
-              {value:8, name:'破坏类型2'},
-              {value:20, name:'破坏类型3'},
-              {value:40, name:'破坏类型4'},
-              {value:10, name:'破坏类型5'},
-              {value:10, name:'破坏类型6'}
-            ],
+            data:data,
+            label: {
+              normal: {
+                textStyle: {
+                  color: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            },
             itemStyle: {
               emphasis: {
                 shadowBlur: 10,
@@ -63,6 +73,23 @@ export default {
         ]
       };
       damageTypePie.setOption(options);
+    },
+    // 格式化数据
+    formatData(){
+      let data = []
+      let legend =[]
+      this.damages.forEach(err => {
+        let temp = {
+          value:err.percent,
+          name:err.name
+        }
+        data.push(temp)
+        legend.push(err.name)
+      })
+      return {
+        data,
+        legend
+      }
     }
   }
 }
