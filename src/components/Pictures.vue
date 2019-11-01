@@ -12,7 +12,10 @@ export default {
   name: 'Picture',
   inheritAttrs: false,
   props: {
-    pictureId: String,
+    pictureId: {
+      type: String,
+      default: 'pictures'
+    },
     imgList: Array
   },
   data() {

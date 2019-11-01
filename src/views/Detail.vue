@@ -1,10 +1,10 @@
 <template>
   <div style="margin: 0 80px;">
-    <div v-if="damage.length === 0">
+    <div v-if="region_name === ''">
       <a-empty />
     </div>
     <div v-else>
-      <h1 style="text-align: left; margin-left: 80px; margin-bottom: 40px; font-weight: 600;">沟南许地</h1>
+      <h1 style="text-align: left; margin-left: 80px; margin-bottom: 40px; font-weight: 600;">{{ region_name }}</h1>
       <div class="left">
         <a-menu style="width: 256px;" mode="inline" @click="handleClick">
           <a-menu-item key="intro">
@@ -13,7 +13,8 @@
           </a-menu-item>
           <a-sub-menu>
             <span slot="title"><a-icon type="database" /><span>破坏类型</span></span>
-            <a-menu-item :key="'d'+index" v-for="(item, index) in damage">破坏类型{{ index+1 }}</a-menu-item>
+            <!-- TODO -->
+            <a-menu-item :key="'d'+index" v-for="(item, index) in damages">破坏类型{{ index+1 }}</a-menu-item>
           </a-sub-menu>
           <a-menu-item key="chart">
             <a-icon type="pie-chart" />
@@ -27,9 +28,9 @@
       </div>
       
       <div class="right">
-        <Introduction v-if="menuKey==='intro'"/>
-        <Damages v-if="menuKey.startsWith('d')"/>
-        <Charts v-if="menuKey==='chart'"/>
+        <Introduction v-if="menuKey==='intro'" :intro="intro"/>
+        <Damages v-if="menuKey.startsWith('d')" :damages="damages"/>
+        <Charts v-if="menuKey==='chart'" :damages="damages"/>
         <div v-if="menuKey==='rank'">
           <Rank :rankValue="rankValue"/>
           <div style="height: 26px; width: 100%;"></div>
@@ -60,22 +61,44 @@ export default {
   data() {
     return {
       menuKey: 'intro',
-      damage: [
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' }
-      ],
-      rankValue: 1,
-      conclusion: `
-        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-        沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-      `
+      region_name: '',  // 地区名称
+      intro: {
+        content: '',
+        pictures: []
+      },  // 简介相关
+      damages: [
+        // { id: 1, name: '', percent: 0, pictures: [] }
+      ],  // 破坏类型相关
+      rankValue: 0,  // 评级
+      conclusion: '',  // 总结
     }
+  },
+  mounted() {
+    const id = this.$route.query.id
+    // 一次请求
+    // 处理成需要的格式
+    this.$api.detail.regionDetail(id).then(detail => {
+      const data = detail.data
+      this.region_name = data.region_name
+      this.intro.content = data.introduction
+      this.intro.pictures.push(data.first_picture)
+      data.pictures.forEach(pic => this.intro.pictures.push(pic.picture_path))
+      this.rankValue = data.repair_rating
+      this.conclusion = data.conclusion
+      const damages = data.damage_type
+      this.damages = []
+      let temp = {}
+      damages.forEach(damage => {
+        temp = {}
+        temp.id = damage.type_id
+        // TODO
+        temp.name = `破坏类型${damage.type_id}`
+        temp.percent = damage.percent
+        temp.pictures = []
+        damage.pictures.forEach(pic => temp.pictures.push(pic.picture_path))
+        this.damages.push(temp)
+      })
+    })
   },
   methods: {
     handleClick(e) {
@@ -84,7 +107,7 @@ export default {
         const anchor = this.$el.querySelector(`#${e.key}`) || {};
         document.documentElement.scrollTop = anchor.offsetTop;
       }
-    },
+    }
   },
 }
 </script>
