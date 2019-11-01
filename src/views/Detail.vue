@@ -14,7 +14,7 @@
           <a-sub-menu>
             <span slot="title"><a-icon type="database" /><span>破坏类型</span></span>
             <!-- TODO -->
-            <a-menu-item :key="'d'+index" v-for="(item, index) in damage">破坏类型{{ index+1 }}</a-menu-item>
+            <a-menu-item :key="'d'+index" v-for="(item, index) in damages">破坏类型{{ index+1 }}</a-menu-item>
           </a-sub-menu>
           <a-menu-item key="chart">
             <a-icon type="pie-chart" />
@@ -61,18 +61,6 @@ export default {
   data() {
     return {
       menuKey: 'intro',
-
-      // TODO 不需要的
-      damage: [
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' },
-        { name: '破坏' }
-      ],
-
-      // true
       region_name: '',  // 地区名称
       intro: {
         content: '',

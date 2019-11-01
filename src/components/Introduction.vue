@@ -7,7 +7,7 @@
         {{ intro.content }}
       </span>
     </div>
-    <Pictures :imgList="pictures"/>
+    <Pictures :imgList="intro.pictures"/>
   </div>
 </template>
 
