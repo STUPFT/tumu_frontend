@@ -25,25 +25,25 @@
       <a-collapse defaultActiveKey="1" :bordered="false">
         <a-collapse-panel header="破坏类型" key="1">
           <a-button  id="DY0" @click="onDamageTyleButton">全部</a-button>
-          <a-button class="damageType" v-for="(value,key,index) in damageType" :key="index" :id="'DY'+ value.type_id"  @click="onDamageTyleButton">{{value.type_name}}</a-button>
+          <a-button class="damageType" v-for="(value,key,index) in damageType" :key="index" :typeId="value.type_id" :id="'DY'+ value.type_id"  @click="onDamageTyleButton">{{value.type_name}}</a-button>
         </a-collapse-panel>
         <a-collapse-panel header="待修复紧迫性评级" key="2">
           <a-button id="rating0" @click="onRepairRatingButton">全部</a-button>
-          <a-button class="RepairRating" id="rating1" @click="onRepairRatingButton">一级</a-button>
-          <a-button class="RepairRating" id="rating2" @click="onRepairRatingButton">二级</a-button>
-          <a-button class="RepairRating" id="rating3" @click="onRepairRatingButton">三级</a-button>
-          <a-button class="RepairRating" id="rating4" @click="onRepairRatingButton">四级</a-button>
-          <a-button class="RepairRating" id="rating5" @click="onRepairRatingButton">五级</a-button>
+          <a-button class="RepairRating" :repairRating="1" id="rating1" @click="onRepairRatingButton">一级</a-button>
+          <a-button class="RepairRating" :repairRating="2" id="rating2" @click="onRepairRatingButton">二级</a-button>
+          <a-button class="RepairRating" :repairRating="3" id="rating3" @click="onRepairRatingButton">三级</a-button>
+          <a-button class="RepairRating" :repairRating="4" id="rating4" @click="onRepairRatingButton">四级</a-button>
+          <a-button class="RepairRating" :repairRating="5" id="rating5" @click="onRepairRatingButton">五级</a-button>
         </a-collapse-panel>
       </a-collapse>
     </div>
 
     <!-- 地区卡片列表 -->
     <div class="region-cards">
-      <div v-for="item in regionList" :key="item.id" class="region-card">
+      <div v-for="item in regionList" :key="item.region_id" class="region-card">
         <!-- <img v-bind:src="item.first_picture" alt=""> -->
         <img src="../assets/test.jpg" alt="">
-        <div class="region-name">{{ item.name }}</div>
+        <div class="region-name">{{ item.region_name }}</div>
         <div class="region-desc">
           <h1>简介</h1>
           <p>{{ item.introduction }}</p>
@@ -68,60 +68,16 @@ export default {
       value: 1,
       current: 2,
       damageType:{},
-      regionList: [
-        {
-          id: 1,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
-        },
-        {
-          id: 2,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
-        },
-        {
-          id: 3,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
-        },
-        {
-          id: 4,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
-        },
-        {
-          id: 5,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: `如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助
-            如果你有问题，没有其他地方可以转向，神秘而难以捉摸的罗伯特·麦考尔将为你寻求的治安法官提供帮助`
-        },
-        {
-          id: 6,
-          name: '名称',
-          first_picture: '../assets/test.jpg',
-          introduction: ''
-        },
-      ],
+      allDamageTypeId:'',
+      repair_rating:'1,2,3,4,5',
+      regionListParams:{},
+      regionList:[]
     }
   },
-  mounted(){
+  async created(){
     // 获取破坏类型列表。
-    this.GetDamageTypeList();
+    await this.GetDamageTypeList();
+    this.GetRegionList()
   },
   methods: {
     onSearch(keyword) {
@@ -132,17 +88,19 @@ export default {
       this.value = e.target.value;
     },
     // 按钮颜色的切换
-    onDamageTyleButton(e){
+    async onDamageTyleButton(e){
       const ele = e.target;
+      let situation = 0; // 用于后面筛选的时候分开各种情况。
       if(ele.id === 'DY0'){
         // 把"全部"按钮设成蓝色
         ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
         const damageTypeBT = document.getElementsByClassName('damageType')
         // 把其他按钮设成灰色
-        for(let key in damageTypeBT){
-          damageTypeBT[key].style['color'] = 'rgba(0,0,0,0.6)';
-          damageTypeBT[key].style['border-color'] = 'rgb(217,217,217)';
+        for(let ele of damageTypeBT){
+          ele.style['color'] = 'rgba(0,0,0,0.6)';
+          ele.style['border-color'] = 'rgb(217,217,217)';
         }
+        await this.changeRegionListByDamageType(this.allDamageTypeId,situation)
       }
       else {
         // 把"全部"按钮设成灰色
@@ -153,23 +111,31 @@ export default {
         if(ele.style['color'] === 'rgb(64, 169, 255)'){
           ele.style['color'] = 'rgba(0,0,0,0.6)'
           ele.style['border-color'] = 'rgb(217,217,217)'
+          // 是蓝色，则直接从type_id中删除
+          situation = 1
+          await this.changeRegionListByDamageType(ele.getAttribute('typeId'),situation)
         }
         else {
           ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
+          // 不是蓝色，则需要先用include判断是全部按钮为蓝，还是其他按钮为蓝，分开处理。
+          situation = 2
+          await this.changeRegionListByDamageType(ele.getAttribute('typeId'),situation)
         }
       }
     },
-    onRepairRatingButton(e){
+    async onRepairRatingButton(e){
       const ele = e.target;
+      let situation = 0; // 用于后面筛选的时候分开各种情况。
       if(ele.id === 'rating0'){
         // 把"全部"按钮设成蓝色
         ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
         const RepairRatingBT = document.getElementsByClassName('RepairRating')
         // 把其他按钮设成灰色
-        for(let key in RepairRatingBT){
-          RepairRatingBT[key].style['color'] = 'rgba(0,0,0,0.6)';
-          RepairRatingBT[key].style['border-color'] = 'rgb(217,217,217)';
+        for(let ele of RepairRatingBT){
+          ele.style['color'] = 'rgba(0,0,0,0.6)';
+          ele.style['border-color'] = 'rgb(217,217,217)';
         }
+        await this.changeRegionListByRepairRating(this.repair_rating,situation)
       }
       else {
         // 把"全部"按钮设成灰色
@@ -180,9 +146,15 @@ export default {
         if(ele.style['color'] === 'rgb(64, 169, 255)'){
           ele.style['color'] = 'rgba(0,0,0,0.6)'
           ele.style['border-color'] = 'rgb(217,217,217)'
+          // 是蓝色，则直接从type_id中删除
+          situation = 1
+          await this.changeRegionListByRepairRating(ele.getAttribute('repairRating'),situation)
         }
         else {
           ele.style['border-color'] = ele.style['color'] = 'rgb(64, 169, 255)'
+          // 不是蓝色，则需要先用include判断是全部按钮为蓝，还是其他按钮为蓝，分开处理。
+          situation = 2
+          await this.changeRegionListByRepairRating(ele.getAttribute('repairRating'),situation)
         }
       }
     },
@@ -196,13 +168,79 @@ export default {
     async GetDamageTypeList (){
       try{
         this.damageType = (await this.$api.home.damageType({})).damageType;
+        // 把damageType存起来，方便其他页面使用。
+        this.$store.state.damageType = this.damageType
       }catch(err){
         console.log(err);
       }
+    },
+    // 初始化时获取地区列表。
+    async GetRegionList(){
+      let type_id = ''
+      // 获取全部的破坏类型id
+      for( let value in this.damageType){
+        type_id = type_id + this.damageType[value].type_id
+      }
+      // 用逗号隔开每个数字
+      type_id = type_id.split('').join(',')
+      // 初始化damageTypeId,方便后面的时候，不用每次都求
+      this.allDamageTypeId = type_id
+      const repair_rating = this.repair_rating
+      this.regionListParams = {
+        type_id,
+        repair_rating,
+        start:0,
+        num:10,
+      }
+      this.regionList = (await this.$api.home.regionList(this.regionListParams)).region
+    },
+    // 根据用户对破坏类型和评级的刷选动态刷新地区列表
+    async changeRegionListByDamageType(type_id,situation){
+      switch (situation) {
+        // 用户点击破坏类型的'全部'按钮，则把参数的type_id修改为包含全部破坏类型的id
+        case 0:
+          this.regionListParams.type_id = type_id;
+          break;
+        // 用户点击了破坏类型的非'全部'按钮，并且该按钮为蓝色，则直接把该type_id从按钮中删除
+        case 1:
+          this.regionListParams.type_id = this.regionListParams.type_id.replace(/,/g,'').replace(type_id,'')
+          this.regionListParams.type_id = this.regionListParams.type_id.split('').join(',')
+          break;
+        // 用户点击了破坏类型的非'全部'按钮，并且该按钮不为蓝色，则分情况处理，用include判断，如果该type_id存在，
+              // 则证明是'全部'按钮为蓝，所以直接覆盖就行，如果不是，则需要添加。
+        case 2:
+          this.regionListParams.type_id.includes(type_id)? this.regionListParams.type_id = type_id:(
+            this.regionListParams.type_id ==='' ? this.regionListParams.type_id = this.regionListParams.type_id + `${type_id}` : this.regionListParams.type_id = this.regionListParams.type_id + `,${type_id}`
+        )
+          break;
+      }
+      this.regionList = (await this.$api.home.regionList(this.regionListParams)).region
+    },
+    async changeRegionListByRepairRating(repair_rating,situation){
+      switch (situation) {
+              // 用户点击评级的'全部'按钮，则把参数的repair_rating修改为包含全部评级
+        case 0:
+          this.regionListParams.repair_rating = repair_rating ;
+          break;
+              // 用户点击了评级的非'全部'按钮，并且该按钮为蓝色，则直接把该评级从参数中删除
+        case 1:
+          this.regionListParams.repair_rating = this.regionListParams.repair_rating.replace(/,/g,'').replace(repair_rating,'')
+          this.regionListParams.repair_rating = this.regionListParams.repair_rating.split('').join(',')
+          break;
+              // 用户点击了评级的非'全部'按钮，并且该按钮不为蓝色，则分情况处理，用include判断，如果该type_id存在，
+              // 则证明是'全部'按钮为蓝，所以直接覆盖就行，如果不是，则需要添加。
+        case 2:
+          this.regionListParams.repair_rating.includes(repair_rating)? this.regionListParams.repair_rating = repair_rating:(
+          this.regionListParams.repair_rating ==='' ? this.regionListParams.repair_rating = this.regionListParams.repair_rating + `${repair_rating}` : this.regionListParams.repair_rating = this.regionListParams.repair_rating + `,${repair_rating}`
+          )
+          break;
+      }
+      this.regionList = (await this.$api.home.regionList(this.regionListParams)).region
     }
   },
 }
 </script>
+
 
 <style scoped>
 #container {

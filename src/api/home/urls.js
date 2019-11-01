@@ -1,3 +1,4 @@
 export default {
-    damageType:'/destroy/list'
+    damageType:'/destroy/list',
+    regionList: '/region/list'
 }

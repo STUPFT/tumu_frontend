@@ -2,7 +2,6 @@ import axios from 'axios'
 
 // 创建 axios 实例
 let service = axios.create({
-    // headers: {'Content-Type': 'application/json'},
     timeout: 60000
 })
 
@@ -35,22 +34,6 @@ service.interceptors.response.use(
         }
     },
     (error) => {
-        // let info = {},
-        //     { status, statusText, data } = error.response
-        //
-        // if (!error.response) {
-        //     info = {
-        //         code: 5000,
-        //         msg: 'Network Error'
-        //     }
-        // } else {
-        //     // 此处整理错误信息格式
-        //     info = {
-        //         code: status,
-        //         data: data,
-        //         msg: statusText
-        //     }
-        // }
         return Promise.reject(error.response)
     }
 )
