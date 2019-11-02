@@ -3,7 +3,7 @@
     <h1>总结</h1>
     <hr style="opacity: 0.3;">
     <span class="con-desc">
-      {{ content }}
+      {{ content ? content : '暂无内容' }}
     </span>
   </div>
 </template>

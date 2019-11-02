@@ -76,7 +76,6 @@ export default {
   async mounted() {
     const id = this.$route.query.id
     if (!(Object.prototype.toString.call(this.$store.state.damageType) === '[object Array]' && this.$store.state.damageType.length !== 0)) {
-      console.log('request');
       await this.GetDamageTypeList();
     }
     // 一次请求

@@ -88,6 +88,7 @@ export default {
   },
   methods: {
     onSearch(keyword) {
+      if (!keyword) return;
       this.search_keyword = keyword;
       this.$router.push({
         path: '/search',

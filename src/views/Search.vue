@@ -9,6 +9,7 @@
           @search="onSearch"
           enterButton="Search"
           size="large"
+          v-model="keyword"
         />
       </div>
       <!-- 单选按钮 -->
@@ -29,7 +30,7 @@
     <div v-else>
       <a-divider style="margin-bottom: 50px;">搜索结果</a-divider>
       <div class="result-body" v-for="(item, index) in result" :key="index">
-        <div class="result-pic-box"></div>
+        <div class="result-pic-box" :style="'background: url('+item.first_picture+') no-repeat; background-size: 100% 100%;'"></div>
         <div class="result-text">
           <div class="result-text-content">
             <div class="result-title-content">
@@ -38,7 +39,7 @@
                 {{ item.intro }}
               </p>
             </div>
-            <span class="cui-btn" @click="checkDetail">查看更多</span>
+            <span class="cui-btn" @click="checkDetail(item.id)">查看更多</span>
           </div>
         </div>
       </div>
@@ -53,30 +54,44 @@ export default {
   data() {
     return {
       value: 1,
-      search_keyword: '',
-      result: [
-        { id: 1, name: '沟南许地', first_picture: '',
-          intro: `
-            沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-          ` // TODO 做裁剪
-        },
-        { id: 2, name: '沟南许地', first_picture: '',
-          intro: `
-            沟南许地汕头沟南许地位于汕头市区北郊， 面积1．5平方公里，人口1800余人，距市中心只有7公里，古地名叫紫菔陇。全村皆姓许，先祖由中原许昌迁闽，进而入潮，至第十世许兆基及其四子许弘烈自潮州来此开基，繁衍七百载；传至十五世，脉分数支，一支留居本土，一支外迁广州，成为广州的名门望族。
-          ` // TODO 做裁剪
-        },
-      ]
+      keyword: '',
+      result: []
+    }
+  },
+  async mounted() {
+    const keyword = this.$route.query.keyword
+    if (keyword) {
+      this.keyword = keyword
+      await this.onSearch()
     }
   },
   methods: {
-    onSearch(keyword) {
-      this.search_keyword = keyword;
+    async onSearch() {
+      const key = this.keyword
+      if (!key) return
+      this.result = []
+      const mode = this.value === 1 ? 'damage_type' : 'region_info'
+      const data = (await this.$api.search.search({ key, mode })).data
+      let temp
+      data.forEach(d => {
+        temp = {}
+        temp.id = d.region_id
+        temp.name = d.region_name
+        temp.first_picture = d.first_picture
+        temp.intro = d.introduction.length < 200 ? d.introduction : d.introduction.substring(0, 200).concat('...')
+        this.result.push(temp)
+      })
     },
     onChange(e) {
       this.value = e.target.value;
     },
-    checkDetail() {
-      this.$router.push('/detail');
+    checkDetail(id) {
+      this.$router.push({
+        path: 'detail',
+        query: {
+          id: id
+        }
+      });
     }
   }
 }
@@ -105,7 +120,6 @@ export default {
 	left: 0;
 	width: 420px;
 	height: 280px;
-	background: url("../assets/test.jpg");
 	background-position: center;
 	background-size: cover
 }

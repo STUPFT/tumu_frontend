@@ -1,6 +1,6 @@
 <template>
   <div class="rate-container">
-    <h1 class="rate-title">评级</h1>
+    <h1 class="rate-title">待修复紧迫性评级</h1>
     <hr style="opacity: 0.3;">
     <a-rate :defaultValue="rankValue" disabled />
     <span class="rate-desc">{{ rateDesc[rankValue-1] }}</span>
@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      rateDesc: ['一般严重', '不严重', '严重', '较严重', '非常严重']
+      rateDesc: ['严重', '较严重', '非常严重', '超级严重', '已无救']
     }
   },
   components: {
