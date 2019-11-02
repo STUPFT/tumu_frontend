@@ -15,15 +15,13 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   },
   mounted(){
     this.initDamageTypePie();
   },
   methods:{
-    initDamageTypePie(){
-      console.log(this.damages)
+    initDamageTypePie() {
       const {data,legend} = this.formatData()
       const damageTypePie = this.$echarts.init(document.getElementById('damageTypePie'), 'light');
       const options = {

@@ -22,17 +22,6 @@ export default {
     return {
     }
   },
-  mounted() {
-    // let temp = {}
-    // this.damages.forEach(damage => {
-    //   temp = {}
-    //   temp.id = damage.type_id
-    //   temp.name = `破坏类型${damage.type_id}`
-    //   temp.pictures = []
-    //   damage.pictures.forEach(pic => temp.pictures.push(pic.picture_path))
-    //   this.damagesList.push(temp)
-    // })
-  },
   components: {
     Pictures
   }

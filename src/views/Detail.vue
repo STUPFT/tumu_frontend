@@ -73,8 +73,12 @@ export default {
       conclusion: '',  // 总结
     }
   },
-  mounted() {
+  async mounted() {
     const id = this.$route.query.id
+    if (!(Object.prototype.toString.call(this.$store.state.damageType) === '[object Array]' && this.$store.state.damageType.length !== 0)) {
+      console.log('request');
+      await this.GetDamageTypeList();
+    }
     // 一次请求
     // 处理成需要的格式
     this.$api.detail.regionDetail(id).then(detail => {
@@ -91,8 +95,7 @@ export default {
       damages.forEach(damage => {
         temp = {}
         temp.id = damage.type_id
-        // TODO
-        temp.name = `破坏类型${damage.type_id}`
+        temp.name = this.$store.state.damageType[damage.type_id-1].type_name
         temp.percent = damage.percent
         temp.pictures = []
         damage.pictures.forEach(pic => temp.pictures.push(pic.picture_path))
@@ -107,8 +110,18 @@ export default {
         const anchor = this.$el.querySelector(`#${e.key}`) || {};
         document.documentElement.scrollTop = anchor.offsetTop;
       }
+    },
+    // 获取破坏类型列表
+    async GetDamageTypeList (){
+      try{
+        this.damageType = (await this.$api.home.damageType({})).damageType;
+        // 把damageType存起来，方便其他页面使用。
+        this.$store.state.damageType = this.damageType
+      }catch(err){
+        console.log(err);
+      }
     }
-  },
+  }
 }
 </script>
 

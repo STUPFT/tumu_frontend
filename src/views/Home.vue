@@ -47,7 +47,7 @@
         <div class="region-desc">
           <h1>简介</h1>
           <p>{{ item.introduction }}</p>
-          <a-button type="danger" @click="checkDetail">查看更多</a-button>
+          <a-button type="danger" @click="checkDetail(item.region_id)">查看更多</a-button>
         </div>
       </div>
     </div>
@@ -171,11 +171,11 @@ export default {
       }
     },
 
-    checkDetail() {
+    checkDetail(id) {
       this.$router.push({
         path: '/detail',
         query: {
-          id: 1
+          id: id
         }
       })
     },
