@@ -6,7 +6,7 @@ let service = axios.create({
 })
 
 // service.defaults.baseURL = '/api' // 跨域需要加上的
-service.defaults.baseURL = 'http://111.230.147.75:7001'
+service.defaults.baseURL = 'http://120.77.174.231:7001'
 // 设置 post、put 默认 Content-Type
 service.defaults.headers.post['Content-Type'] = 'application/json'
 service.defaults.headers.put['Content-Type'] = 'application/json'
