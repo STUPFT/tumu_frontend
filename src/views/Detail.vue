@@ -73,7 +73,7 @@ export default {
       conclusion: '',  // 总结
     }
   },
-  async mounted() {
+  async created() {
     const id = this.$route.query.id
     if (!(Object.prototype.toString.call(this.$store.state.damageType) === '[object Array]' && this.$store.state.damageType.length !== 0)) {
       await this.GetDamageTypeList();

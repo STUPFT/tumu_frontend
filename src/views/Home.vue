@@ -12,8 +12,8 @@
     <!-- 单选按钮 -->
     <div style="margin-top: 10px;">
       <a-radio-group @change="onChange" v-model="value">
-        <a-radio :value="1">按破坏类型搜索</a-radio>
-        <a-radio :value="2">按地区信息搜索</a-radio>
+        <a-radio :value="1">按地区信息搜索</a-radio>
+        <a-radio :value="2">按破坏类型搜索</a-radio>
       </a-radio-group>
     </div>
     <!--分割线-->
@@ -93,7 +93,8 @@ export default {
       this.$router.push({
         path: '/search',
         query: {
-          keyword: keyword
+          keyword: keyword,
+          modeValue: this.value
         }
       });
     },

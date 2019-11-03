@@ -15,8 +15,8 @@
       <!-- 单选按钮 -->
       <div style="margin-top: 10px;">
         <a-radio-group @change="onChange" v-model="value">
-          <a-radio :value="1">按破坏类型搜索</a-radio>
-          <a-radio :value="2">按地区信息搜索</a-radio>
+          <a-radio :value="1">按地区信息搜索</a-radio>
+          <a-radio :value="2">按破坏类型搜索</a-radio>
         </a-radio-group>
       </div>
     </div>
@@ -58,10 +58,11 @@ export default {
       result: []
     }
   },
-  async mounted() {
+  async created() {
     const keyword = this.$route.query.keyword
     if (keyword) {
       this.keyword = keyword
+      this.value = this.$route.query.modeValue
       await this.onSearch()
     }
   },
@@ -70,7 +71,7 @@ export default {
       const key = this.keyword
       if (!key) return
       this.result = []
-      const mode = this.value === 1 ? 'damage_type' : 'region_info'
+      const mode = this.value === 1 ? 'region_info' : 'damage_type' 
       const data = (await this.$api.search.search({ key, mode })).data
       let temp
       data.forEach(d => {
