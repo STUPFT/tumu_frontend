@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-infinite-scroll="loadMore" :infinite-scroll-disabled="busy" :infinite-scroll-distance="-70" :infinite-scroll-throttle-delay="1000">
     <!-- 搜索栏组件 -->
     <div>
       <!-- 搜索栏 -->
@@ -35,7 +35,7 @@
           <div class="result-text-content">
             <div class="result-title-content">
               <h1>{{ item.name }}</h1>
-              <p> 
+              <p>
                 {{ item.intro }}
               </p>
             </div>
@@ -49,20 +49,32 @@
 </template>
 
 <script>
+  import infiniteScroll from 'vue-infinite-scroll'
 export default {
   name: 'Search',
+  directives: {infiniteScroll},
   data() {
     return {
       value: 1,
       keyword: '',
-      result: []
+      result: [],
+      busy:false, //控制下拉加载的。
+      page:0, //控制第几页。
+      loading:false, // 控制加载中标签。
+      anyMoreRegion:true, // 是否还有更多的地区列表
+      num:10, //控制加载的时候每次拿多少个数据
+      // 记录上一次搜索的关键词和mode，防止用户修改了当前的关键词和mode导致加载更多的时候出现错误信息。
+      previous_search_keyword:'',
+      previous_value:''
     }
   },
   async created() {
     const keyword = this.$route.query.keyword
     if (keyword) {
       this.keyword = keyword
+      this.previous_search_keyword = keyword
       this.value = this.$route.query.modeValue
+      this.previous_value = this.$route.query.modeValue
       await this.onSearch()
     }
   },
@@ -71,8 +83,8 @@ export default {
       const key = this.keyword
       if (!key) return
       this.result = []
-      const mode = this.value === 1 ? 'region_info' : 'damage_type' 
-      const data = (await this.$api.search.search({ key, mode })).data
+      const mode = this.value === 1 ? 'region_info' : 'damage_type'
+      const data = (await this.$api.search.search({ key, mode})).data
       let temp
       data.forEach(d => {
         temp = {}
@@ -82,6 +94,13 @@ export default {
         temp.intro = d.introduction.length < 200 ? d.introduction : d.introduction.substring(0, 200).concat('...')
         this.result.push(temp)
       })
+      // 记录当前的keyword和value
+      this.previous_search_keyword = this.keyword
+      this.previous_value = this.value
+      // 初始化滚动加载的相关信息
+      this.page = 0;
+      this.busy = false;
+      this.anyMoreRegion = true
     },
     onChange(e) {
       this.value = e.target.value;
@@ -93,6 +112,41 @@ export default {
           id: id
         }
       });
+    },
+    async loadMore(){
+      // 防止列表还没初始化就执行了这个函数导致报错。
+      if(this.result === []){
+        return;
+      }
+      this.loading = true;
+      if(this.anyMoreRegion){
+        this.page++;
+        const params = {
+          key:this.previous_search_keyword,
+          mode:this.previous_value === 1 ? 'region_info' : 'damage_type',
+          start:this.page * 10,
+          num:this.num
+        }
+        let data = (await this.$api.search.search(params)).data
+        !(data.length === 0)?(() => {
+          data.forEach(d => {
+            let temp = {}
+            temp.id = d.region_id
+            temp.name = d.region_name
+            temp.first_picture = d.first_picture
+            temp.intro = d.introduction.length < 200 ? d.introduction : d.introduction.substring(0, 200).concat('...')
+            this.result.push(temp)
+          })
+        })(): (()=>{
+          this.anyMoreRegion = false;
+          this.busy = false;
+          this.$message.warning('所有地区已经加载完');
+        })()
+      }
+      else{
+        this.$message.warning('所有地区已经加载完')
+      }
+      this.loading = false;
     }
   }
 }
